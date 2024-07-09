@@ -254,6 +254,8 @@ const books = [
   },
 ];
 
+// array destructuring
+
 const [firstBook, secondBook] = books;
 const [, , thirdBook] = books;
 console.log(firstBook, secondBook, thirdBook);
@@ -270,6 +272,8 @@ const ratingStars = [63405, 1808];
 
 const [fiveStarRatings, oneStarRatings, threeStarRatings = 0] = ratingStars;
 console.log(fiveStarRatings, oneStarRatings, threeStarRatings);
+
+// object destructuring
 
 const { title, author, ISBN } = books[0];
 console.log(title, author, ISBN);
@@ -305,3 +309,42 @@ printBookInfo({
 });
 
 printBookInfo({ title: 'Algorithms', author: 'Robert Sedgewick' });
+
+// spread operator
+
+const bookAuthors = { ...books[0].author, ...books[1].author };
+console.log(bookAuthors);
+
+const spellWord = string => {
+  console.log(...string);
+};
+spellWord('JavaScript');
+
+// rest pattern and parameters
+const [mainkeyword, ...rest] = books[0].keywords;
+console.log(mainkeyword);
+
+const { publisher: bookPublisher, ...restOfTheBook } = books[1];
+console.log(bookPublisher);
+console.log(restOfTheBook);
+
+const printBookAuthorsCount = (title, ...authors) => {
+  console.log(`The book ${title} has ${authors.length} authors`);
+};
+printBookAuthorsCount('Algorithms', 'Robert Sedgewick', 'Kevin Wayne');
+
+// Short Circuiting (&& and ||)
+const hasExamplesInJava = book =>
+  book.programmingLanguage === 'Java' || 'no data available';
+
+console.log(hasExamplesInJava(books[1]));
+
+books.forEach(book => {
+  book.onlineContent && console.log(book.title);
+});
+
+// nullish coalescing operator (??)
+books.forEach(book => {
+  book.onlineContent ??
+    console.log(`${book.title}" provides no data about its online content`);
+});
