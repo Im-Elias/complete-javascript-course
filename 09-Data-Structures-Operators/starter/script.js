@@ -348,3 +348,16 @@ books.forEach(book => {
   book.onlineContent ??
     console.log(`${book.title}" provides no data about its online content`);
 });
+
+// logical assignment operators
+
+books.forEach(book => {
+  book.edition ??= 1;
+});
+console.table(books);
+
+books.forEach(book => {
+  book.highlighted &&= !(book.thirdParty.goodreads.rating < 4.2);
+});
+
+console.table(books);
