@@ -361,3 +361,119 @@ books.forEach(book => {
 });
 
 console.table(books);
+
+console.log('---- CODING CHALLENGE #1 ----');
+
+const game = {
+  team1: 'Bayern Munich',
+  team2: 'Borrussia Dortmund',
+  players: [
+    [
+      'Neuer',
+      'Pavard',
+      'Martinez',
+      'Alaba',
+      'Davies',
+      'Kimmich',
+      'Goretzka',
+      'Coman',
+      'Muller',
+      'Gnarby',
+      'Lewandowski',
+    ],
+    [
+      'Burki',
+      'Schulz',
+      'Hummels',
+      'Akanji',
+      'Hakimi',
+      'Weigl',
+      'Witsel',
+      'Hazard',
+      'Brandt',
+      'Sancho',
+      'Gotze',
+    ],
+  ],
+  score: '4:0',
+  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+  date: 'Nov 9th, 2037',
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+};
+
+const [players1, players2] = game.players;
+console.log(players1, players2);
+
+const [gk, ...fieldPlayers] = players1;
+console.log(gk, fieldPlayers);
+
+const allPlayers = [...game.players[0], ...game.players[1]];
+console.log(allPlayers);
+
+const players1Final = [...players1, 'Thiago', 'Coutinho', 'Periscic'];
+console.log(players1Final);
+
+const { team1, x: draw, team2 } = game.odds;
+console.log(team1, draw, team2);
+
+const printGoals = function (...players) {
+  console.log(`${players.length} goals were scored`);
+};
+printGoals(
+  'Pavard',
+  'Martinez',
+  'Alaba',
+  'Davies',
+  'Kimmich',
+  'Goretzka',
+  'Coman',
+  'Muller'
+);
+printGoals(...game.scored);
+
+game.odds.team1 > game.odds.team2 &&
+  console.log('Team 2 is more likely to win');
+game.odds.team1 < game.odds.team2 &&
+  console.log('Team 1 is more likely to win');
+
+// for of loop
+
+let sum = 0;
+for (const item of books) {
+  sum += item.pages;
+}
+console.log(sum);
+
+console.log(typeof books[0].author);
+
+const allAuthors = [];
+for (const book of books) {
+  if (typeof book.author === 'object') {
+    allAuthors.push(...book.author);
+  } else {
+    allAuthors.push(book.author);
+  }
+}
+console.log(allAuthors);
+
+for (const [index, author] of allAuthors.entries()) {
+  console.log(index + 1, author);
+}
+
+const bookData = [
+  ['title', 'Computer Networking: A Top-Down Approach'],
+  ['author', ['James F. Kurose', 'Keith W. Ross']],
+  ['publisher', 'Addison Wesley'],
+];
+
+// Do the rest
+const newBook = {
+  [bookData[0][0]]: bookData[0][1],
+  [bookData[1][0]]: bookData[1][1],
+  [bookData[2][0]]: bookData[2][1],
+};
+console.log(newBook);
