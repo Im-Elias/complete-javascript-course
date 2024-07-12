@@ -362,6 +362,82 @@ books.forEach(book => {
 
 console.table(books);
 
+// for of loop
+
+let sum = 0;
+for (const item of books) {
+  sum += item.pages;
+}
+console.log(sum);
+
+console.log(typeof books[0].author);
+
+const allAuthors = [];
+for (const book of books) {
+  if (typeof book.author === 'object') {
+    allAuthors.push(...book.author);
+  } else {
+    allAuthors.push(book.author);
+  }
+}
+console.log(allAuthors);
+
+for (const [index, author] of allAuthors.entries()) {
+  console.log(index + 1, author);
+}
+
+const bookData = [
+  ['title', 'Computer Networking: A Top-Down Approach'],
+  ['author', ['James F. Kurose', 'Keith W. Ross']],
+  ['publisher', 'Addison Wesley'],
+];
+
+// Do the rest
+const newBook = {
+  [bookData[0][0]]: bookData[0][1],
+  [bookData[1][0]]: bookData[1][1],
+  [bookData[2][0]]: bookData[2][1],
+};
+console.log(newBook);
+
+const pages = 880;
+
+const newBook2 = {
+  title: 'The C Programming Language',
+  author: ['Brian W. Kernighan', 'Dennis M. Ritchie'],
+  pages,
+};
+console.log(newBook2);
+
+// ?.
+
+const getFirstKeyword = book => book.keywords?.[0] ?? 'no keywords';
+
+console.log(getFirstKeyword(books[0]));
+console.log(getFirstKeyword(newBook2));
+
+// looping through objects
+
+const entries = [];
+
+for (const key of Object.keys(books[0].thirdParty.goodreads)) {
+  entries.push([key]);
+}
+
+console.log(entries);
+
+for (const [key, value] of Object.values(
+  books[0].thirdParty.goodreads
+).entries()) {
+  entries[key][1] = value;
+}
+
+console.log(entries);
+
+const entries2 = Object.entries(books[0].thirdParty.goodreads);
+
+console.log(entries2);
+
 console.log('---- CODING CHALLENGE #1 ----');
 
 const game = {
@@ -440,40 +516,26 @@ game.odds.team1 > game.odds.team2 &&
 game.odds.team1 < game.odds.team2 &&
   console.log('Team 1 is more likely to win');
 
-// for of loop
+console.log('---- CODING CHALLENGE #2 ----');
 
-let sum = 0;
-for (const item of books) {
-  sum += item.pages;
-}
-console.log(sum);
+for (const [index, player] of game.scored.entries())
+  console.log(`Goal ${index + 1}: ${player}`);
 
-console.log(typeof books[0].author);
+let avgOdds = 0;
+for (const odd of Object.values(game.odds)) avgOdds += odd;
+console.log(avgOdds / Object.values(game.odds).length);
 
-const allAuthors = [];
-for (const book of books) {
-  if (typeof book.author === 'object') {
-    allAuthors.push(...book.author);
-  } else {
-    allAuthors.push(book.author);
-  }
-}
-console.log(allAuthors);
-
-for (const [index, author] of allAuthors.entries()) {
-  console.log(index + 1, author);
+for (const [index, odd] of Object.entries(game.odds)) {
+  console.log(
+    `Odd of${game[index] === undefined ? '' : ' victory'} ${
+      game[index] ?? 'draw'
+    }: ${odd}`
+  );
 }
 
-const bookData = [
-  ['title', 'Computer Networking: A Top-Down Approach'],
-  ['author', ['James F. Kurose', 'Keith W. Ross']],
-  ['publisher', 'Addison Wesley'],
-];
+const scorers = {};
 
-// Do the rest
-const newBook = {
-  [bookData[0][0]]: bookData[0][1],
-  [bookData[1][0]]: bookData[1][1],
-  [bookData[2][0]]: bookData[2][1],
-};
-console.log(newBook);
+for (const player of game.scored) {
+  scorers[player] = (scorers[player] ?? 0) + 1;
+}
+console.log(scorers);
